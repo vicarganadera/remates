@@ -1,0 +1,175 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Vicar Ganadera - 3️⃣ Vaca</title>
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto+Slab:wght@400;700&display=swap');
+    :root { --bg-color: #f4f4f9; --card-bg-color: #ffffff; --text-color: #333; --text-color-light: #555; --header-bg-color: #ffffff; --footer-bg-color: #ffffff; --nav-bg-color: #f8f8f8; --primary-color: #0063a3; --primary-color-hover: #004a7c; --secondary-color: #e67e22; --border-color: #ddd; --table-row-even-bg: #f8f8f8; --table-row-hover-bg: #e9ecef; --button-secondary-bg: #6c757d; --button-secondary-hover: #5a6268; --card-shadow: 0 4px 8px rgba(0,0,0,0.1); --qr-button-bg: #555; --qr-button-hover: #333; --font-primary: 'Roboto Mono', monospace; --font-secondary: 'Roboto Slab', serif; }
+    html.dark-mode { --bg-color: #1a202c; --card-bg-color: #2d3748; --text-color: #E2E8F0; --text-color-light: #A0AEC0; --header-bg-color: #2d3748; --footer-bg-color: #2d3748; --nav-bg-color: #283141; --primary-color: #4299E1; --primary-color-hover: #2b6cb0; --secondary-color: #F6AD55; --border-color: #4A5568; --table-row-even-bg: #2c3a4f; --table-row-hover-bg: #3a4b64; --button-secondary-bg: #4A5568; --button-secondary-hover: #2D3748; --card-shadow: 0 4px 8px rgba(0,0,0,0.3); --qr-button-bg: #A0AEC0; --qr-button-hover: #718096; }
+    
+    body { font-family: var(--font-primary); margin: 0; padding: 0; background-color: var(--bg-color); color: var(--text-color); display: flex; flex-direction: column; min-height: 100vh; transition: background-color 0.3s, color 0.3s; }
+    .container { max-width: 1400px; margin: 20px auto; padding: 0 15px; flex-grow: 1; width: 95%; }
+    .header { text-align: center; padding: 20px 10px; border-bottom: 1px solid var(--border-color); background-color: var(--header-bg-color); transition: background-color 0.3s, border-color 0.3s; }
+    .header .main-banner { max-width: 220px; height: auto; margin-bottom: 20px; }
+    .event-title, .category-title, .card-title, .modal-header h3, .summary-card-title, .info-card-title, .contact-card-title { font-family: var(--font-secondary); }
+    .event-title { font-size: 1.8em; color: var(--text-color); margin: 15px 0; font-weight: 700; }
+    .event-tag-container { max-width: 800px; margin: 0 auto; } .event-tag { font-size: 1.1em; color: var(--text-color-light); margin: 0; line-height: 1.6; } .event-tag b { color: var(--primary-color); }
+    .nav-container, .sort-controls { text-align: center; padding: 15px 10px; background-color: var(--nav-bg-color); border-bottom: 1px solid var(--border-color); transition: background-color 0.3s, border-color 0.3s;}
+    .nav-container { flex-wrap: wrap; display: flex; justify-content: center; gap: 8px;}
+    .sort-controls { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+    .nav-button, .sort-button { text-decoration: none; border: none; color: white; padding: 10px 18px; margin: 0; border-radius: 5px; font-weight: bold; cursor: pointer; transition: background-color 0.3s, transform 0.2s; font-family: var(--font-primary); }
+    .nav-button { background-color: var(--primary-color); } .nav-button:hover { background-color: var(--primary-color-hover); transform: translateY(-2px); } .nav-button.active { background-color: var(--secondary-color); }
+    .sort-button { background-color: var(--button-secondary-bg); font-size: 0.9em; } .sort-button:hover { background-color: var(--button-secondary-hover); } .sort-button.active { background-color: var(--primary-color); font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+    .category-title { font-size: 1.8em; text-align: center; color: var(--text-color); border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; margin-top: 10px; margin-bottom: 30px; font-weight: 700;}
+    .video-grid { display: grid; gap: 25px; grid-template-columns: 1fr; }
+    .card { background: var(--card-bg-color); border-radius: 8px; box-shadow: var(--card-shadow); overflow: hidden; display: flex; flex-direction: column; transition: background-color 0.3s, box-shadow 0.3s; }
+    .card.chart-card img { width: 100%; height: auto; } .card .video-wrapper { cursor: pointer; }
+    .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; background-color: #000; } .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .card-content { padding: 15px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; } .card-title { font-size: 1.1rem; font-weight: 700; margin: 0 0 15px 0; color: var(--text-color); } .card-description { font-size: 0.95em; color: var(--text-color-light); text-align: left; line-height: 1.5; flex-grow: 1; }
+    .card-buttons { display: flex; gap: 10px; justify-content: center; margin-top: 20px; }
+    .whatsapp-button, .qr-button { flex: 1; display: inline-block; padding: 12px 20px; color: white; text-decoration: none; border: none; border-radius: 5px; font-weight: bold; font-size: 1rem; cursor: pointer; transition: background-color 0.2s; text-align: center; }
+    .whatsapp-button { background-color: #25D366; } .whatsapp-button:hover { background-color: #128C7E; }
+    .qr-button { background-color: var(--qr-button-bg); color: var(--card-bg-color); } html.dark-mode .qr-button { color: var(--text-color); } .qr-button:hover { background-color: var(--qr-button-hover); }
+    .table-container { width: 100%; overflow-x: auto; margin-top: 10px; }
+    .lotes-table { border-collapse: collapse; width: 100%; margin: 0; font-size: 1em; box-shadow: var(--card-shadow); background-color: var(--card-bg-color); }
+    .lotes-table th, .lotes-table td { padding: 12px 15px; border: 1px solid var(--border-color); text-align: center; }
+    .lotes-table th { background-color: var(--primary-color); color: white; font-weight: bold; }
+    .lotes-table th.sortable-header { cursor: pointer; } .lotes-table th.sortable-header:hover { background-color: var(--primary-color-hover); } .lotes-table th.sortable-header.active { background-color: var(--secondary-color); }
+    .lotes-table tbody tr { transition: background-color 0.2s; } .lotes-table tbody tr:nth-child(even) { background-color: var(--table-row-even-bg); } .lotes-table tbody tr:hover { background-color: var(--table-row-hover-bg); }
+    .charts-section { display: flex; flex-direction: column; gap: 25px; margin-top: 25px; } .chart-row-single { display: block; margin-top: 20px; } .chart-card { padding: 15px; }
+    .pie-charts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 25px; }
+    .theme-switcher-container { text-align: center; padding: 30px 0 10px 0; } .theme-toggle-button { background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+    .footer { background-color: var(--footer-bg-color); color: #888; text-align: center; padding: 20px 10px; border-top: 1px solid var(--border-color); margin-top: auto; transition: background-color 0.3s, border-color 0.3s; }
+    .footer p { margin: 0; font-size: 0.8em; line-height: 1.6; }
+    .modal-overlay { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); align-items: center; justify-content: center; }
+    .modal-content { background-color: var(--card-bg-color); margin: auto; padding: 20px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); width: 90%; max-width: 350px; position: relative; animation: fadeIn 0.3s; }
+    .modal-header { padding-bottom: 15px; border-bottom: 1px solid var(--border-color); } .modal-header h3 { margin: 0; color: var(--text-color); text-align: center; }
+    .modal-body { padding-top: 15px; text-align: center; } .modal-body img { max-width: 100%; height: auto; border-radius: 4px; }
+    .modal-close { color: var(--text-color-light); position: absolute; top: 10px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer; } .modal-close:hover { color: var(--text-color); }
+    @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+    .placeholder-content { text-align: center; padding: 50px 20px; color: var(--text-color-light); border: 2px dashed var(--border-color); border-radius: 8px; margin-top: 20px; background-color: var(--card-bg-color); }
+    /* --- ¡NUEVOS ESTILOS PARA EL DASHBOARD, INFO CARDS Y CONTACTOS! --- */
+    .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-bottom: 40px; }
+    .info-card { background: var(--card-bg-color); border-radius: 8px; box-shadow: var(--card-shadow); display: flex; flex-direction: column; overflow: hidden; }
+    .info-card-img { width: 100%; height: 180px; object-fit: cover; }
+    .info-card-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+    .info-card-title { font-size: 1.2rem; margin-top: 0; margin-bottom: 10px; color: var(--text-color); }
+    .info-card-text { font-size: 0.9rem; line-height: 1.6; color: var(--text-color-light); flex-grow: 1; margin-bottom: 0; }
+    .calendar-card-container { padding: 20px; justify-content: center; align-items: center; }
+    .calendar-card { background-color: var(--primary-color); color: white; border-radius: 10px; text-align: center; width: 100%; max-width: 250px; margin: auto; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-family: var(--font-secondary); }
+    html.dark-mode .calendar-card { background-color: var(--secondary-color); color: #1a202c; }
+    .calendar-header { padding: 10px; font-size: 1.5em; font-weight: bold; border-top-left-radius: 10px; border-top-right-radius: 10px; background-color: rgba(0,0,0,0.15); }
+    .calendar-body { padding: 20px 10px; }
+    .calendar-day { font-size: 4.5em; font-weight: 700; line-height: 1; }
+    .calendar-year { font-size: 1.2em; opacity: 0.8; }
+    .calendar-footer { padding: 10px; background-color: rgba(0,0,0,0.25); border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; font-size: 1.2em; font-weight: bold; }
+    .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-bottom: 40px; }
+    .maps-grid-container { display: grid; gap: 25px; grid-template-columns: 1fr; }
+    .summary-card { background: var(--card-bg-color); border-radius: 8px; box-shadow: var(--card-shadow); padding: 20px; display: flex; flex-direction: column; }
+    .summary-card-title { font-size: 1.25em; margin-top: 0; margin-bottom: 20px; color: var(--text-color); text-align: center; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+    .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: center; }
+    .summary-item .summary-value { font-size: 1.8em; font-weight: 700; color: var(--primary-color); display: block; }
+    .summary-item .summary-label { font-size: 0.9em; color: var(--text-color-light); }
+    .featured-lot-container { display: flex; flex-direction: column; gap: 15px; }
+    .featured-lot { border: 1px solid var(--border-color); border-radius: 5px; padding: 15px; cursor: pointer; transition: background-color 0.2s, transform 0.2s; }
+    .featured-lot:hover { background-color: var(--table-row-hover-bg); transform: scale(1.03); }
+    .featured-label { font-size: 0.8em; font-weight: bold; color: var(--secondary-color); margin-bottom: 5px; }
+    .featured-title { font-weight: bold; color: var(--text-color); margin-bottom: 5px; }
+    .featured-value { font-size: 1.1em; color: var(--text-color-light); }
+    .conditions-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; flex-grow: 1; }
+    .condition-item { background-color: var(--bg-color); padding: 10px; border-radius: 4px; font-size: 0.95em; }
+    .cta-button { display: block; background-color: var(--secondary-color); color: white; padding: 12px; border-radius: 5px; text-align: center; text-decoration: none; font-weight: bold; margin-top: auto; transition: background-color 0.2s; }
+    .cta-button:hover { background-color: #d35400; }
+    .chart-card-summary { padding: 0; overflow: hidden; } .chart-card-summary img { display: block; width: 100%; height: auto; }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; }
+    .contact-card { background: var(--card-bg-color); border-radius: 8px; box-shadow: var(--card-shadow); padding: 25px; display: flex; flex-direction: column; transition: background-color 0.3s, box-shadow 0.3s; }
+    .contact-card.institutional-card { grid-column: 1 / -1; background: var(--primary-color); color: white; }
+    html.dark-mode .contact-card.institutional-card { background: #2b6cb0; }
+    .contact-card.institutional-card .contact-card-title { color: white; font-size: 1.5rem; text-align: center; }
+    .contact-card.institutional-card .contact-card-text { color: rgba(255, 255, 255, 0.9); line-height: 1.7; font-size: 1rem; }
+    .contact-card.institutional-card b { color: var(--secondary-color); }
+    .contact-card-header { display: flex; align-items: center; margin-bottom: 20px; }
+    .contact-avatar { width: 60px; height: 60px; border-radius: 50%; background-color: var(--primary-color); color: white; display: flex; align-items: center; justify-content: center; font-size: 2em; font-weight: bold; margin-right: 15px; font-family: var(--font-secondary); }
+    .contact-info { flex-grow: 1; }
+    .contact-card-title { margin: 0; font-size: 1.3rem; color: var(--text-color); }
+    .contact-card-role { margin: 0; color: var(--text-color-light); font-size: 0.9em; }
+    .contact-card-body { display: flex; flex-direction: column; gap: 12px; margin-top: auto; }
+    .contact-link { text-decoration: none; color: var(--primary-color); background-color: var(--bg-color); padding: 12px; border-radius: 5px; transition: background-color 0.2s, color 0.2s; font-weight: bold; word-break: break-all; text-align:center; }
+    .contact-link:hover { background-color: var(--primary-color); color: white; }
+    .contact-link.whatsapp { color: #128C7E; } .contact-link.whatsapp:hover { background-color: #25D366; color: white; }
+    /* --- Media Queries --- */
+    @media (min-width: 769px) { .video-grid { grid-template-columns: repeat(2, 1fr); } .maps-grid-container { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1300px) { .video-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 992px) { .info-grid { grid-template-columns: 1fr; } .info-card-img { height: 220px; } }
+    @media (max-width: 768px) {
+      .event-title { font-size: 1.5em; } .event-tag, .nav-button, .sort-button { font-size: 0.9em; } .nav-button, .sort-button { padding: 8px 12px; }
+      .footer p { font-size: 0.75em; } .pie-charts-grid, .contact-grid { grid-template-columns: 1fr; }
+      .lotes-table { box-shadow: none; } .lotes-table thead { display: none; }
+      .lotes-table, .lotes-table tbody, .lotes-table tr, .lotes-table td { display: block; width: 100%; box-sizing: border-box;}
+      .lotes-table tr { margin-bottom: 15px; border: 1px solid var(--border-color); border-radius: 5px; background-color: var(--card-bg-color); box-shadow: var(--card-shadow); }
+      .lotes-table td { text-align: right; padding-left: 50%; position: relative; border: none; border-bottom: 1px solid var(--border-color); } .lotes-table td:last-child { border-bottom: none; }
+      .lotes-table td::before { content: attr(data-label); position: absolute; left: 15px; width: calc(50% - 20px); text-align: left; font-weight: bold; color: var(--text-color); }
+    }
+  </style></head><body><header class="header"><img src="https://vicar.com.ar/wp-content/uploads/2017/02/logo-vicar-300x80.png" alt="Logo Vicar" class="main-banner"><h1 class="event-title">Remate Feria</h1><div class="event-tag-container"><p class="event-tag"><b>Jueves 3 de Julio de 2025 a las 14:30hs</b><br>Predio ferial de Vicar Ganadera S.A., <b>VICTORICA</b>, La Pampa</p></div></header><nav class="nav-container"><a href="index.html" class="nav-button ">🐮 Inicio</a><a href="3-vaca.html" class="nav-button active">3️⃣ Vaca</a><a href="6-macho.html" class="nav-button ">6️⃣ Macho</a><a href="7-m-y-h.html" class="nav-button ">7️⃣ M y H</a><a href="8-hembra.html" class="nav-button ">8️⃣ Hembra</a></nav><main class="container"><h2 class="category-title">3️⃣ Vaca</h2><div id="video-grid-container" class="video-grid">
+    <div class="card">
+      <div class="video-wrapper" onclick="window.open('https://www.youtube.com/embed/HPhlr2lsCG4', '_blank')">
+        <iframe src="https://www.youtube.com/embed/HPhlr2lsCG4?mute=1" title="35 Vacas  con 30 días" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="card-content">
+        <h3 class="card-title">35 Vacas  con 30 días</h3>
+        <div class="card-description"></div>
+        <div class="card-buttons">
+            <a href="https://api.whatsapp.com/send?text=Hola%2C%20estoy%20interesado%20en%20este%20lote%20de%20Vicar%3A%2035%20Vacas%20%20con%2030%20d%C3%ADas.%20Video%3A%20https%3A%2F%2Fwww.youtube.com%2Fembed%2FHPhlr2lsCG4" class="whatsapp-button" target="_blank" onclick="event.stopPropagation();">WhatsApp</a>
+            
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="video-wrapper" onclick="window.open('https://www.youtube.com/embed/YPEy6G5hbN8', '_blank')">
+        <iframe src="https://www.youtube.com/embed/YPEy6G5hbN8?mute=1" title="32 Vacas  con 30 días" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="card-content">
+        <h3 class="card-title">32 Vacas  con 30 días</h3>
+        <div class="card-description"></div>
+        <div class="card-buttons">
+            <a href="https://api.whatsapp.com/send?text=Hola%2C%20estoy%20interesado%20en%20este%20lote%20de%20Vicar%3A%2032%20Vacas%20%20con%2030%20d%C3%ADas.%20Video%3A%20https%3A%2F%2Fwww.youtube.com%2Fembed%2FYPEy6G5hbN8" class="whatsapp-button" target="_blank" onclick="event.stopPropagation();">WhatsApp</a>
+            
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="video-wrapper" onclick="window.open('https://www.youtube.com/embed/IohulsRwJB8', '_blank')">
+        <iframe src="https://www.youtube.com/embed/IohulsRwJB8?mute=1" title="21 Vacas  con 30 días" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="card-content">
+        <h3 class="card-title">21 Vacas  con 30 días</h3>
+        <div class="card-description"></div>
+        <div class="card-buttons">
+            <a href="https://api.whatsapp.com/send?text=Hola%2C%20estoy%20interesado%20en%20este%20lote%20de%20Vicar%3A%2021%20Vacas%20%20con%2030%20d%C3%ADas.%20Video%3A%20https%3A%2F%2Fwww.youtube.com%2Fembed%2FIohulsRwJB8" class="whatsapp-button" target="_blank" onclick="event.stopPropagation();">WhatsApp</a>
+            
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="video-wrapper" onclick="window.open('https://www.youtube.com/embed/AOkgR5KTcFg', '_blank')">
+        <iframe src="https://www.youtube.com/embed/AOkgR5KTcFg?mute=1" title="22 Vacas  con 30 días" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="card-content">
+        <h3 class="card-title">22 Vacas  con 30 días</h3>
+        <div class="card-description"></div>
+        <div class="card-buttons">
+            <a href="https://api.whatsapp.com/send?text=Hola%2C%20estoy%20interesado%20en%20este%20lote%20de%20Vicar%3A%2022%20Vacas%20%20con%2030%20d%C3%ADas.%20Video%3A%20https%3A%2F%2Fwww.youtube.com%2Fembed%2FAOkgR5KTcFg" class="whatsapp-button" target="_blank" onclick="event.stopPropagation();">WhatsApp</a>
+            
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="video-wrapper" onclick="window.open('https://www.youtube.com/embed/7n1Ywp3whbk', '_blank')">
+        <iframe src="https://www.youtube.com/embed/7n1Ywp3whbk?mute=1" title="16 Vacas  con 30 días" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="card-content">
+        <h3 class="card-title">16 Vacas  con 30 días</h3>
+        <div class="card-description"></div>
+        <div class="card-buttons">
+            <a href="https://api.whatsapp.com/send?text=Hola%2C%20estoy%20interesado%20en%20este%20lote%20de%20Vicar%3A%2016%20Vacas%20%20con%2030%20d%C3%ADas.%20Video%3A%20https%3A%2F%2Fwww.youtube.com%2Fembed%2F7n1Ywp3whbk" class="whatsapp-button" target="_blank" onclick="event.stopPropagation();">WhatsApp</a>
+            
+        </div>
+      </div>
+    </div></div></main><div class="theme-switcher-container"><button id="theme-toggle" class="theme-toggle-button">Modo Oscuro/Claro</button></div><footer class="footer"><p>Vicar Ganadera S.A. - Consignatarios desde 1964 - Remates Feria en Victorica - Toay - General Acha<br>Última actualización: 7/7/2025, 05:26:49</p></footer><script>document.addEventListener('DOMContentLoaded',function(){const lotesData=[{"idEvento":"18950555","titulo":"35 Vacas  con 30 días","videoUrl":"https://www.youtube.com/embed/HPhlr2lsCG4","embedUrl":"https://www.youtube.com/embed/HPhlr2lsCG4?mute=1","qrCode":"","videoUrlFullscreen":"https://www.youtube.com/embed/HPhlr2lsCG4?mute=1?autoplay=1&mute=1","whatsappText":"Hola%2C%20estoy%20interesado%20en%20este%20lote%20de%20Vicar%3A%2035%20Vacas%20%20con%2030%20d%C3%ADas.%20Video%3A%20https%3A%2F%2Fwww.youtube.com%2Fembed%2FHPhlr2lsCG4","grupo":"3️⃣ Vaca","categoria":"🟣 Vaca","peso":0,"descriptionHTML":"","corral":"S/D","cantidad":35,"plazo":"30","sanidad":"Con","china":"Apto","motivo":"S/D","reproduccion":"No Requerido","calificacion":"S/D","notas":""},{"idEvento":"18950555","titulo":"32 Vacas  con 30 días","videoUrl":"https://www.youtube.com/embed/YPEy6G5hbN8","embedUrl":"https://www.youtube.com/embed/YPEy6G5hbN8?mute=1","qrCode":"","videoUrlFullscreen":"https://www.youtube.com/embed/YPEy6G5hbN8?mute=1?autoplay=1&mute=1","whatsappText":"Hola%2C%20estoy%20interesado%20en%20este%20lote%20de%20Vicar%3A%2032%20Vacas%20%20con%2030%20d%C3%ADas.%20Video%3A%20https%3A%2F%2Fwww.youtube.com%2Fembed%2FYPEy6G5hbN8","grupo":"3️⃣ Vaca","categoria":"🟣 Vaca","peso":0,"descriptionHTML":"","corral":"S/D","cantidad":32,"plazo":"30","sanidad":"Con","china":"Apto","motivo":"S/D","reproduccion":"No Requerido","calificacion":"S/D","notas":""},{"idEvento":"18950555","titulo":"21 Vacas  con 30 días","videoUrl":"https://www.youtube.com/embed/IohulsRwJB8","embedUrl":"https://www.youtube.com/embed/IohulsRwJB8?mute=1","qrCode":"","videoUrlFullscreen":"https://www.youtube.com/embed/IohulsRwJB8?mute=1?autoplay=1&mute=1","whatsappText":"Hola%2C%20estoy%20interesado%20en%20este%20lote%20de%20Vicar%3A%2021%20Vacas%20%20con%2030%20d%C3%ADas.%20Video%3A%20https%3A%2F%2Fwww.youtube.com%2Fembed%2FIohulsRwJB8","grupo":"3️⃣ Vaca","categoria":"🟣 Vaca","peso":0,"descriptionHTML":"","corral":"S/D","cantidad":21,"plazo":"30","sanidad":"Con","china":"Apto","motivo":"S/D","reproduccion":"No Requerido","calificacion":"S/D","notas":""},{"idEvento":"18950555","titulo":"22 Vacas  con 30 días","videoUrl":"https://www.youtube.com/embed/AOkgR5KTcFg","embedUrl":"https://www.youtube.com/embed/AOkgR5KTcFg?mute=1","qrCode":"","videoUrlFullscreen":"https://www.youtube.com/embed/AOkgR5KTcFg?mute=1?autoplay=1&mute=1","whatsappText":"Hola%2C%20estoy%20interesado%20en%20este%20lote%20de%20Vicar%3A%2022%20Vacas%20%20con%2030%20d%C3%ADas.%20Video%3A%20https%3A%2F%2Fwww.youtube.com%2Fembed%2FAOkgR5KTcFg","grupo":"3️⃣ Vaca","categoria":"🟣 Vaca","peso":0,"descriptionHTML":"","corral":"S/D","cantidad":22,"plazo":"30","sanidad":"Con","china":"Apto","motivo":"S/D","reproduccion":"No Requerido","calificacion":"S/D","notas":""},{"idEvento":"18950555","titulo":"16 Vacas  con 30 días","videoUrl":"https://www.youtube.com/embed/7n1Ywp3whbk","embedUrl":"https://www.youtube.com/embed/7n1Ywp3whbk?mute=1","qrCode":"","videoUrlFullscreen":"https://www.youtube.com/embed/7n1Ywp3whbk?mute=1?autoplay=1&mute=1","whatsappText":"Hola%2C%20estoy%20interesado%20en%20este%20lote%20de%20Vicar%3A%2016%20Vacas%20%20con%2030%20d%C3%ADas.%20Video%3A%20https%3A%2F%2Fwww.youtube.com%2Fembed%2F7n1Ywp3whbk","grupo":"3️⃣ Vaca","categoria":"🟣 Vaca","peso":0,"descriptionHTML":"","corral":"S/D","cantidad":16,"plazo":"30","sanidad":"Con","china":"Apto","motivo":"S/D","reproduccion":"No Requerido","calificacion":"⭐⭐","notas":""}];const tbody=document.getElementById('lotes-tbody');const gridContainer=document.getElementById('video-grid-container');const numericColumns=['cantidad','peso'];const pesos=lotesData.map(l=>l.peso).filter(v=>v>0),cantidades=lotesData.map(l=>l.cantidad).filter(v=>v>0);const minPeso=Math.min(...pesos),maxPeso=Math.max(...pesos),minCantidad=Math.min(...cantidades),maxCantidad=Math.max(...cantidades);function getColorForValue(v,min,max){if(min===max)return'hsl(120, 100%, 45%)';const p=(v-min)/(max-min);return`hsl(${120-(p*120)},100%,45%)`}function renderTable(lotes){if(!tbody)return;tbody.innerHTML=lotes.map(l=>`<tr onclick="window.open('${l.videoUrl}','_blank')" style="cursor:pointer;"><td data-label="Corral"><b>${l.corral||''}</b></td><td data-label="Grupo"><b>${l.grupo||''}</b></td><td data-label="Categoría"><b>${l.categoria||''}</b></td><td data-label="Cantidad"><b style="color:${getColorForValue(l.cantidad,minCantidad,maxCantidad)};text-shadow:1px 1px 2px rgba(0,0,0,0.3);">${l.cantidad||''}</b></td><td data-label="Peso"><b style="color:${getColorForValue(l.peso,minPeso,maxPeso)};text-shadow:1px 1px 2px rgba(0,0,0,0.3);">${l.peso||''}</b></td><td data-label="Plazo">${l.plazo||''}</td><td data-label="Sanidad">${l.sanidad||''}</td><td data--label="China">${l.china||''}</td><td data-label="Motivo">${l.motivo||''}</td><td data-label="Reproducción">${l.reproduccion||''}</td><td data-label="Calificación">${l.calificacion||''}</td></tr>`).join('')}function renderGrid(lotes){if(!gridContainer)return;gridContainer.innerHTML=lotes.map(l=>`<div class="card"><div class="video-wrapper" onclick="window.open('${l.videoUrl||'#'}','_blank')"><iframe src="${l.embedUrl}" title="${l.titulo}" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div><div class="card-content"><h3 class="card-title">${l.titulo}</h3><div class="card-description">${l.descriptionHTML}</div><div class="card-buttons"><a href="https://api.whatsapp.com/send?text=${l.whatsappText}" class="whatsapp-button" target="_blank" onclick="event.stopPropagation();">WhatsApp</a></div></div></div>`).join('')}function sortAndRender(col,order){let sorted=[...lotesData];sorted.sort((a,b)=>{const vA=a[col],vB=b[col];if(numericColumns.includes(col))return order==='asc'?(parseFloat(vA)||0)-(parseFloat(vB)||0):(parseFloat(vB)||0)-(parseFloat(vA)||0);else{const sA=String(vA||'').toLowerCase(),sB=String(vB||'').toLowerCase();if(sA<sB)return order==='asc'?-1:1;if(sA>sB)return order==='asc'?1:-1;return 0}});if(tbody)renderTable(sorted);if(gridContainer)renderGrid(sorted)}function handleSortClick(e){const t=e.currentTarget,active=t.classList.contains('active'),col=t.dataset.column;let order=t.dataset.order,newOrder=active?(order==='asc'?'desc':'asc'):(numericColumns.includes(col)?'desc':'asc');document.querySelectorAll('.sort-button,.sortable-header').forEach(el=>{el.classList.remove('active');if(el.dataset.label&&el.innerHTML!==el.dataset.label){el.innerHTML=el.dataset.label}});t.classList.add('active');t.dataset.order=newOrder;t.innerHTML=`${t.dataset.label} ${newOrder==='asc'?'🔼':'🔽'}`;sortAndRender(col,newOrder)}document.querySelectorAll('.sort-button').forEach(b=>b.addEventListener('click',handleSortClick));document.querySelectorAll('.sortable-header').forEach(h=>h.addEventListener('click',handleSortClick))});</script><script>(function(){const themeToggle=document.getElementById('theme-toggle');const htmlElement=document.documentElement;const lightText='🕶️';const darkText='💡';const chartImages=document.querySelectorAll('.chart-image,.chart-card-summary img');function applyTheme(theme){const chartFontColor=theme==='dark'?'%23E2E8F0':'%23333';const axisFontColor=theme==='dark'?'%23A0AEC0':'%23555';const bgColor=theme==='dark'?'%232d3748':'transparent';if(theme==='dark'){htmlElement.classList.add('dark-mode');themeToggle.textContent=darkText}else{htmlElement.classList.remove('dark-mode');themeToggle.textContent=lightText}chartImages.forEach(img=>{if(img.src.includes('quickchart.io')){let newSrc=img.src.replace(/backgroundColor=(transparent|%232d3748)/g,'backgroundColor='+bgColor).replace(/fontColor..*?(?=&)/g,'fontColor='+chartFontColor).replace(/fontColor...*?(?=[,}])/g,'fontColor:'+chartFontColor).replace(/ticks: { fontColor: '.*?' }/g,"ticks: { fontColor: '"+axisFontColor+"' }");img.src=newSrc}})}const savedTheme=localStorage.getItem('vicar-theme')||'light';applyTheme(savedTheme);themeToggle.addEventListener('click',()=>{const newTheme=htmlElement.classList.contains('dark-mode')?'light':'dark';localStorage.setItem('vicar-theme',newTheme);applyTheme(newTheme)})})();</script></body></html>

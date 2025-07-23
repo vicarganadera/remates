@@ -1,0 +1,8 @@
+# Archivo de configuración para servidores Apache (mod_rewrite)
+# NOTA: Este archivo NO tiene efecto en GitHub Pages. Se genera como referencia.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(.*)/$ $1/index.html [L]
+    RewriteRule ^feria/([^/]+)/([^/]+)/?$ /feria/$1/$2/index.html [NC,L]
+</IfModule>
+ErrorDocument 404 /404.html
